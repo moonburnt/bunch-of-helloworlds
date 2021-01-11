@@ -1,12 +1,13 @@
 #!/bin/bash
 
-#simple bash script to split music album's images into files
+# Simple bash script to split music album's images into separate flac files
 
 #now looping confirmation until selected valid input
 #now fixing cue encoding for non-utf-8/ascii files (limited by list of languages known to enca)
 
 #todo: ability to manually select out of multiple cues and multiple flacs
 #todo: show help on empty input
+#todo: ability to split non-flac images
 
 tempcue="temp.cue"
 
