@@ -3,9 +3,7 @@
 ## Script that makes it possible to restrict network access to applications via iptables+group policies
 ## Should work on arch and its derivatives - have no idea about other distros
 
-#TODO: silence output of grep
-
-scriptname=`basename "$0"`
+scriptname=$(basename "$0")
 
 dependency_check() {
     if ! command -v $1 &>/dev/null; then
@@ -36,11 +34,11 @@ done
 
 echo "Trying to add group $groupname"
 # "grep -w" will search for exact match - useful to avoid entries with similar names
-grep -w $groupname /etc/group && echo "$groupname already exists! Please pick another name and try again" && exit 1
+grep -qw $groupname /etc/group && echo "$groupname already exists! Please pick another name and try again" && exit 1
 groupadd $groupname || exit 1
 
 echo "Adding $username to $groupname"
-getent passwd | grep -w $username || (echo "Couldnt find $username in list of existing users! Abort" && exit 1)
+getent passwd | grep -qw $username || (echo "Couldnt find $username in list of existing users! Abort" && exit 1)
 usermod -aG $groupname $username || exit 1
 
 echo "Backing up current iptables settings as /etc/iptables/iptables.rules.old"
